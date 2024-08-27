@@ -161,7 +161,7 @@ header nav ul li.login-button a:hover {
 
 .about-cards .card h3 {
     margin-top: 10px;
-    color: #007bff;
+    color: #333333;
 }
 
 .about-cards .card:hover {
@@ -205,7 +205,7 @@ header nav ul li.login-button a:hover {
 
 .service-cards .card h3 {
     margin-top: 10px;
-    color: #007bff;
+    color: #333333;
 }
 
 .service-cards .card:hover {
@@ -377,4 +377,11 @@ footer {
     .testimonial-cards .card {
         width: calc(100% - 20px);
     }
+}
+
+
+.card i {
+    font-size: 50px;
+    color: #007bff;
+    margin-bottom: 10px;
 }
