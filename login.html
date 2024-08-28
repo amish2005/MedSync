@@ -3,27 +3,31 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login - Hospital Website</title>
-    <link rel="stylesheet" href="styles.css">
+    <title>Hospital Login</title>
+    <link rel="stylesheet" href="login.css">
 </head>
 <body>
     <div class="login-container">
-        <div class="login-form">
-            <h2>Login</h2>
-            <form action="main.html" method="post">
-                <div class="form-group">
-                    <label for="username">Username:</label>
-                    <input type="text" id="username" name="username" required>
-                </div>
-                <div class="form-group">
-                    <label for="password">Password:</label>
-                    <input type="password" id="password" name="password" required>
-                </div>
-                <button type="submit" class="btn">Login</button>
-            </form>
-        </div>
-    </div>
-    <script src="Script.js"></script>
+        <h2>Login</h2>
+        <form action="/login" method="POST">
+            <label for="username">E-mail ID or Mobile Number:</label>
+            <input type="text" id="username" name="username" required>
 
+            <label for="password">Password:</label>
+            <input type="password" id="password" name="password" required>
+
+            <div class="remember-me">
+                <input type="checkbox" id="remember-me" name="remember-me">
+                <label for="remember-me">Remember me</label>
+            </div>
+
+            <button type="submit">Login</button>
+
+            <div class="extra-options">
+                <a href="/register" class="register-link">New User? Register here</a>
+                <a href="/hospital-login" class="hospital-login-link">Not a patient? Hospital Login</a>
+            </div>
+        </form>
+    </div>
 </body>
 </html>

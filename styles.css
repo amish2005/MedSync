@@ -155,13 +155,23 @@ header nav ul li.login-button a:hover {
 }
 
 .about-cards .card img {
-    max-width: 100%;
+    width: 95%;
     border-radius: 5px;
+    height: 36vh;
+    
 }
 
 .about-cards .card h3 {
     margin-top: 10px;
     color: #333333;
+    
+}
+
+.about-cards .card a {
+    
+    color: #333333;
+    text-decoration: none;
+    
 }
 
 .about-cards .card:hover {
@@ -199,8 +209,9 @@ header nav ul li.login-button a:hover {
 }
 
 .service-cards .card img {
-    max-width: 100%;
+    width: 100%;
     border-radius: 5px;
+    height: 60vh;
 }
 
 .service-cards .card h3 {
@@ -385,3 +396,4 @@ footer {
     color: #007bff;
     margin-bottom: 10px;
 }
+
