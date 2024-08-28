@@ -3,29 +3,29 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Hospital Login</title>
+    <title>Patient Login</title>
     <link rel="stylesheet" href="login.css">
 </head>
 <body>
     <div class="login-container">
         <h2>Login</h2>
         <form action="/login" method="POST">
-            <label for="username">E-mail ID or Mobile Number:</label>
+            <label class="user_name" for="username">E-mail ID or Mobile Number:</label>
             <input type="text" id="username" name="username" required>
 
-            <label for="password">Password:</label>
+            <label class="user_name" for="password">Password:</label>
             <input type="password" id="password" name="password" required>
 
             <div class="remember-me">
-                <input type="checkbox" id="remember-me" name="remember-me">
-                <label for="remember-me">Remember me</label>
+                <input type="checkbox" id="remember">
+                <label for="remember">Remember Me</label>
             </div>
 
             <button type="submit">Login</button>
 
             <div class="extra-options">
-                <a href="/register" class="register-link">New User? Register here</a>
-                <a href="/hospital-login" class="hospital-login-link">Not a patient? Hospital Login</a>
+                <a href="signup.html" class="register-link">New User? Register here</a>
+                <a href="hos-login.html" class="hospital-login-link">Not a patient? Hospital Login</a>
             </div>
         </form>
     </div>

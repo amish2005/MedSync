@@ -39,7 +39,7 @@ h2 {
     color: #333;
 }
 
-input[type="text"], input[type="password"] {
+input[type="text"], input[type="tel"], input[type="email"], input[type="number"], input[type="password"] {
     width: 100%;
     padding: 10px;
     margin-bottom: 20px;
