@@ -505,3 +505,74 @@ footer {
 .login-button:hover .dropdown {
     display: block;
 }
+
+/* Hide menu icon on larger screens */
+.menu-icon {
+    display: none;
+    cursor: pointer;
+}
+
+/* Media query for screens less than 768px */
+@media (max-width: 768px) {
+    header .container {
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    .menu-icon {
+        display: block;
+        font-size: 24px;
+        color: #fff;
+    }
+
+    .nav-list {
+        display: none;
+        flex-direction: column;
+        width: 100%;
+        background-color: #0056b3;
+        position: absolute;
+        top: 60px;
+        left: 0;
+        z-index: 999;
+    }
+
+    .nav-list.active {
+        display: flex;
+    }
+
+    .nav-list li {
+        width: 100%;
+        text-align: center;
+        margin: 0;
+    }
+
+    .nav-list li a {
+        padding: 15px 0;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+    }
+
+    /* Adjust dropdown for mobile */
+    .login-button .dropdown {
+        position: static;
+        width: 100%;
+        box-shadow: none;
+        background-color: #0056b3;
+    }
+
+    .login-button .dropdown li a {
+        padding: 15px 0;
+    }
+}
+
+/* Media query for screens less than 480px */
+@media (max-width: 480px) {
+    .nav-list li a {
+        font-size: 16px;
+    }
+
+    .login-button .dropdown li a {
+        font-size: 16px;
+    }
+}
+
