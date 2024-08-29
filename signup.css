@@ -25,6 +25,8 @@ body {
     max-width: 400px;
     text-align: center;
     box-sizing: border-box;
+    height:90%;
+    
 }
 
 h2 {
@@ -63,6 +65,50 @@ button {
 
 button:hover {
     background-color: #0056b3;
+}
+
+.gender-options {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px;
+}
+
+.gender-option {
+    display: flex;
+    align-items: center;
+    color: #333;
+    position: relative;
+    padding-left: 30px; /* Space for custom radio button */
+    cursor: pointer;
+}
+
+.gender-option input[type="radio"] {
+    opacity: 0;
+    position: absolute;
+    left: 0;
+    cursor: pointer;
+}
+
+.gender-option .custom-radio {
+    position: absolute;
+    left: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    border: 2px solid #007bff;
+    background-color: white;
+    transition: background-color 0.3s, border-color 0.3s;
+}
+
+.gender-option input[type="radio"]:checked + .custom-radio {
+    background-color: #007bff;
+    border-color: #007bff;
+}
+
+.gender-option input[type="radio"]:focus + .custom-radio {
+    /* outline: 2px solid rgba(0, 123, 255, 0.5); */
 }
 
 .remember-me {
