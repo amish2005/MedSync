@@ -1,0 +1,57 @@
+<!-- views/signup.ejs -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Patient Sign Up</title>
+    <link rel="stylesheet" href="/signup.css">
+</head>
+<body>
+    <div class="login-container">
+        <h2>Sign Up</h2>
+        <form action="/signup" method="POST">
+            <label class="user_name" for="name">Name</label>
+            <input type="text" id="name" name="name" required>
+
+            <label class="user_name" for="number">Number</label>
+            <input type="tel" id="number" name="number" required>
+
+            <label class="user_name" for="email">Email-ID</label>
+            <input type="email" id="email" name="email" required>
+
+            <label class="user_name" for="age">Age</label>
+            <input type="number" id="age" name="age" required>
+
+            <label class="user_name">Gender</label>
+            <div class="gender-options">
+                <label class="gender-option">
+                    <input type="radio" name="gender" value="male" required>
+                    <span class="custom-radio"></span>
+                    Male
+                </label>
+                <label class="gender-option">
+                    <input type="radio" name="gender" value="female" required>
+                    <span class="custom-radio"></span>
+                    Female
+                </label>
+            </div>
+
+            <label class="user_name" for="password">Create Password</label>
+            <input type="password" id="password" name="password" required>
+
+            <div class="remember-me">
+                <input type="checkbox" id="remember">
+                <label for="remember">Remember Me</label>
+            </div>
+
+            <button type="submit">Sign Up</button>
+            <div class="extra-options">
+                <a href="/" class="register-link">Already a User? Login</a>
+                <a href="hos-login.html" class="hospital-login-link">Not a patient? Hospital Login</a>
+            </div>
+        </form>
+    </div>
+</body>
+</html>
+
