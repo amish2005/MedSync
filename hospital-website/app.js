@@ -58,11 +58,20 @@ app.post('/login', (req, res) => {
   });
 });
 
+
 app.get('/dashboard', (req, res) => {
   if (req.session.user) {
-    res.send(`Welcome ${req.session.user.name}`);
+    res.render('index', { user: req.session.user });
   } else {
     res.redirect('/');
+  }
+});
+
+app.get('/dashboard/bed-availability', (req, res) => {
+  if (req.session.user) {
+    res.render('index2', { user: req.session.user });
+  } else {
+    res.redirect('/home/bed-availability');
   }
 });
 
@@ -70,3 +79,50 @@ app.get('/dashboard', (req, res) => {
 app.listen(3000, () => {
   console.log('Server started on http://localhost:3000');
 });
+
+app.get('/home', (req, res) => {
+  res.render('home');
+});
+
+app.get('/dashboard/bed-availability', (req, res) => {
+  res.render('index2');
+});
+
+app.get('/home/bed-availability', (req, res) => {
+  res.render('home-index2');
+});
+
+// Log out functionality
+app.post('/logout', (req, res) => {
+  req.session.destroy(err => {
+    if (err) {
+      return res.redirect('/dashboard');
+    }
+    res.redirect('/home');
+  });
+});
+
+app.get('/dashboard', (req, res) => {
+  if (req.session.user) {
+    res.render('index');
+  } else {
+    res.redirect('/home');
+  }
+}); 
+
+app.post('/logoutt', (req, res) => {
+  req.session.destroy(err => {
+    if (err) {
+      return res.redirect('/dashboard');
+    }
+    res.redirect('/home/bed-availability');
+  });
+});
+
+app.get('/dashboard/bed-availability', (req, res) => {
+  if (req.session.user) {
+    res.render('index2');
+  } else {
+    res.redirect('/home/bed-availability');
+  }
+}); 

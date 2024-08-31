@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Hospital Website</title>
+    <link rel="stylesheet" href="styles.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css"
+    />
+    <script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        AOS.init();
+      });
+    </script>
+  </head>
+  <body>
+    <header>
+      <div class="container">
+          <h1 class="hos_name">Hospital Name</h1>
+          <nav>
+              <div class="menu-icon">
+                  <i class="fas fa-bars"></i>
+              </div>
+              <ul class="nav-list">
+                  <li><a href="http://localhost:3000/dashboard#home">Home</a></li>
+                  <li><a href="http://localhost:3000/dashboard#about">Patient</a></li>
+                  <li><a href="http://localhost:3000/dashboard#services">Services</a></li>
+                  <li><a href="http://localhost:3000/dashboard#testimonials">Testimonials</a></li>
+                  <li><a href="http://localhost:3000/dashboard#contact">Contact Us</a></li>
+                  <li class="login-button">
+                    <form action="/logout" method="POST">
+                        <button type="submit" class="btttn">Log Out</button>
+                    </form>
+                </li>
+              </ul>
+          </nav>
+      </div>
+  </header>
+  
+
+    <section id="home" class="hero">
+      <div class="container">
+        <h2 data-aos="fade-up">Welcome, <%= user.name %></h2>
+
+        <p data-aos="fade-up" data-aos-delay="200">
+          Your health is our priority. We offer a wide range of medical services
+          to cater to all your needs.
+        </p>
+        <a href="#services" class="btn">Learn More</a>
+      </div>
+    </section>
+
+    <section id="about" class="about">
+      <div class="container">
+        <h2 data-aos="fade-up">Patient</h2>
+        <p data-aos="fade-up" data-aos-delay="200">
+          Your Health, Our Mission: Combining State-of-the-Art Technology with Personalized Care for a Healthier Happier You.
+        </p>
+        <div class="about-cards">
+          <div class="card" data-aos="fade-up" data-aos-delay="400">
+            <a href="http://localhost:3000/dashboard/bed-availability"
+              ><img src="/media/img_bed.jpg" alt="Modern Facility"
+            /></a>
+            <br />
+            <i class="fa-solid fa-bed"></i>
+            <h3><a href="http://localhost:3000/dashboard/bed-availability">Check Bed Availabilty</a></h3>
+            <p>
+              Check Real-Time Availability of Hospital Beds: Ensuring Immediate
+              Care When You Need It Most.
+            </p>
+          </div>
+          <div class="card" data-aos="fade-up" data-aos-delay="600">
+            <a href="pat_add.com"
+              ><img src="/media/img_care.jpg" alt="Experienced Staff"
+            /></a>
+            <br />
+            <i class="fas fa-user-md"></i>
+            <a href="pat_add.com"><h3>Admission of Patients</h3></a>
+            <p>
+              Seamless Patient Admission Process: Your Journey to Recovery
+              Starts Here.
+            </p>
+          </div>
+          <div class="card" data-aos="fade-up" data-aos-delay="800">
+            <a href="opd.com"
+              ><img src="/media/img_opd.jpg" alt="Compassionate Care"
+            /></a>
+            <br />
+            <i class="fas fa-heartbeat"></i>
+            <a href="opd.com"><h3>OPD</h3></a>
+            <p>
+              Access Live OPD Data: Stay Updated on Appointment Slots and Wait
+              Times.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="services" class="services">
+      <div class="container">
+        <h2 data-aos="fade-up">Our Services</h2>
+        <div class="service-cards">
+          <div class="card" data-aos="fade-up" data-aos-delay="200">
+            <img src="/media/img_amb.jpg" alt="Emergency Care" />
+            <br />
+            <i class="fas fa-ambulance"></i>
+            <h3>Emergency Care</h3>
+            <p>
+              24/7 emergency services with state-of-the-art equipment and highly
+              trained staff.
+            </p>
+          </div>
+          <div class="card" data-aos="fade-up" data-aos-delay="400">
+            <img src="/media/img_surg.jpg" alt="Surgery" />
+            <br />
+
+            <i class="fas fa-procedures"></i>
+            <h3>Surgery</h3>
+            <p>
+              We offer a wide range of surgical procedures with the highest
+              standards of care.
+            </p>
+          </div>
+          <div class="card" data-aos="fade-up" data-aos-delay="600">
+            <img src="/media/img_out.jpg" alt="Outpatient Services" />
+            <br />
+            <i class="fas fa-stethoscope"></i>
+            <h3>Outpatient Services</h3>
+            <p>
+              Convenient and comprehensive outpatient services for all your
+              healthcare needs.
+            </p>
+          </div>
+          <div class="card" data-aos="fade-up" data-aos-delay="800">
+            <img src="/media/img_mat.jpg" alt="Maternity Care" />
+            <br />
+            <i class="fas fa-baby"></i>
+            <h3>Maternity Care</h3>
+            <p>
+              We provide compassionate care for expectant mothers and their
+              babies.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="testimonials" class="testimonials">
+      <div class="container">
+        <h2 data-aos="fade-up">What Our Patients Say</h2>
+        <div class="testimonial-cards">
+          <div class="card" data-aos="fade-up" data-aos-delay="200">
+            <p>
+              "The care I received at this hospital was exceptional. The staff
+              was attentive and professional."
+            </p>
+            <h3>- John Doe</h3>
+          </div>
+          <div class="card" data-aos="fade-up" data-aos-delay="400">
+            <p>
+              "I felt very comfortable during my stay here. The doctors and
+              nurses were incredibly kind and supportive."
+            </p>
+            <h3>- Jane Smith</h3>
+          </div>
+          <div class="card" data-aos="fade-up" data-aos-delay="600">
+            <p>
+              "This hospital has the best facilities and staff. I highly
+              recommend it to anyone in need of medical care."
+            </p>
+            <h3>- Mary Johnson</h3>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="contact" class="contact">
+      <div class="container">
+        <h2 data-aos="fade-up">Contact Us</h2>
+        <p data-aos="fade-up" data-aos-delay="200">
+          We are here to help you. Reach out to us for any inquiries or to book
+          an appointment.
+        </p>
+        <div class="contact-info">
+          <div class="info" data-aos="fade-up" data-aos-delay="400">
+            <i class="fas fa-envelope"></i>
+            <p><strong>Email:</strong> contact@hospital.com</p>
+          </div>
+          <div class="info" data-aos="fade-up" data-aos-delay="600">
+            <i class="fas fa-phone"></i>
+            <p><strong>Phone:</strong> (123) 456-7890</p>
+          </div>
+          <div class="info" data-aos="fade-up" data-aos-delay="800">
+            <i class="fas fa-map-marker-alt"></i>
+            <p>
+              <strong>Address:</strong> 123 Health St., Wellness City, HC 12345
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <footer>
+      <div class="container">
+        <p>&copy; 2024 Hospital Name. All rights reserved.</p>
+      </div>
+    </footer>
+    <script src="Script.js"></script>
+  </body>
+</html>
