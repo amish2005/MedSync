@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hospital Login</title>
+    <link rel="stylesheet" href="/hos-login.css">
+</head>
+<body>
+    <div class="login-container">
+        <h2>Hospital Login</h2>
+        <form action="/hos-login" method="POST">
+            <label class="user_name" for="hospital-number">Hospital Registration Number</label>
+            <input type="text" id="hospital-number" name="hospital-number" required>
+
+            <label class="user_name" for="password">Password</label>
+            <input type="password" id="password" name="password" required>
+
+            <button type="submit">Login</button>
+        </form>
+        <div class="extra-options">
+            <a href="http://localhost:3000/#contact">Not Registered With Us? Contact Us</a>
+            <a href="http://localhost:3000/">Not a Hospital? Patient Login</a>
+            
+        </div>
+    </div>
+</body>
+</html>

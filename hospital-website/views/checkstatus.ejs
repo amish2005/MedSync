@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Check Admission Status</title>
+    <link rel="stylesheet" href="/checkstatus.css">
+</head>
+<body>
+    <header>
+        <div class="container">
+            <h1 class="hos_name">Hospital Name</h1>
+            <nav>
+                <div class="menu-icon">
+                    <i class="fas fa-bars"></i>
+                </div>
+                <ul class="nav-list">
+                    <li><a href="http://localhost:3000/dashboard#home">Home</a></li>
+                  <li><a href="http://localhost:3000/dashboard#about">Patient</a></li>
+                  <li><a href="http://localhost:3000/dashboard#services">Services</a></li>
+                  <li><a href="http://localhost:3000/dashboard#testimonials">Testimonials</a></li>
+                  <li><a href="http://localhost:3000/dashboard#contact">Contact Us</a></li>
+                    <li class="login-button">
+                        <form action="/logout" method="POST">
+                            <button type="submit" class="btttn">Log Out</button>
+                        </form>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main class="form-container">
+        <div class="containers">
+            
+            <form action="/dashboard/adm-pat/adm-status/check-status" method="POST">
+               <h3>CHECK ADMISSION STATUS</h3>
+                <label for="applicationNumber">Application Number:</label>
+                <input type="text" id="applicationNumber" name="applicationNumber" required>
+                 <label for="contactNumber">Contact Number:</label>
+                <input type="text" id="contactNumber" name="contactNumber" required>
+                <button type="submit">Check Status</button>
+            </form>
+        </div>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2024 Hospital Name. All rights reserved.</p>
+        </div>
+    </footer>
+</body>
+</html>

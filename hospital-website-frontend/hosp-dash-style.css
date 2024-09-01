@@ -1,0 +1,341 @@
+/* Global Styles */
+body {
+    font-family: 'Arial', sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f4f4f4;
+    color: #333;
+    scroll-behavior: smooth;
+}
+
+/* Header */
+header {
+    background: linear-gradient(to right, #007bff, #0056b3);
+    color: #fff;
+    padding: 10px 0;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    transition: background-color 0.3s ease;
+}
+
+header:hover {
+    background: linear-gradient(to right, #0056b3, #003d7a);
+}
+
+header .container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+header h1 {
+    margin: 0;
+    font-size: 24px;
+}
+
+header nav ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+header nav ul li {
+    margin-left: 15px;
+    position: relative;
+}
+
+header nav ul li a {
+    color: #fff;
+    text-decoration: none;
+    font-size: 14px;
+    padding: 10px 15px;
+    transition: color 0.3s ease, background-color 0.3s ease, transform 0.3s ease;
+    border-radius: 5px;
+}
+
+header nav ul li a:hover {
+    color: #ffffff;
+    background-color: rgba(255, 255, 255, 0.2);
+    transform: translateY(-2px);
+}
+
+/* Highlighted Login Button */
+header nav ul li.login-button a {
+    background-color: darkblue;
+    font-weight: bold;
+}
+
+header nav ul li.login-button a:hover {
+    background-color: #007bff;
+    color: #fff;
+}
+
+.hos_name {
+    margin-left: 1vw;
+}
+
+/* Dropdown Menu Styles */
+.login-button {
+    position: relative;
+    margin-right: 1vw;
+}
+
+.login-button .dropdown {
+    display: none;
+    position: absolute;
+    top: 100%;
+    right: 0;
+    background-color: darkblue;
+    padding: 10px 0;
+    border-radius: 5px;
+    min-width: 150px;
+    z-index: 1000;
+}
+
+.login-button .dropdown li {
+    list-style: none;
+    margin: 0;
+    
+}
+
+.login-button .dropdown li a {
+    display: block;
+    padding: 10px 15px;
+    color: #fff;
+    text-decoration: none;
+    font-size: 14px;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+}
+
+.login-button .dropdown li a:hover {
+    background-color: #007bff;
+}
+
+/* Show dropdown on hover */
+.login-button:hover .dropdown {
+    display: block;
+}
+
+/* Hide menu icon on larger screens */
+.menu-icon {
+    display: none;
+    cursor: pointer;
+}
+
+/* Media query for screens less than 768px */
+@media (max-width: 768px) {
+    header .container {
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    .menu-icon {
+        display: block;
+        font-size: 24px;
+        color: #fff;
+    }
+
+    .nav-list {
+        display: none;
+        flex-direction: column;
+        width: 100%;
+        background-color: #0056b3;
+        position: absolute;
+        top: 60px;
+        left: 0;
+        z-index: 999;
+    }
+
+    .nav-list.active {
+        display: flex;
+    }
+
+    .nav-list li {
+        width: 100%;
+        text-align: center;
+        margin: 0;
+    }
+
+    .nav-list li a {
+        padding: 15px 0;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+    }
+
+    /* Adjust dropdown for mobile */
+    .login-button .dropdown {
+        position: static;
+        width: 100%;
+        box-shadow: none;
+        background-color: #0056b3;
+    }
+
+    .login-button .dropdown li a {
+        padding: 15px 0;
+    }
+}
+
+/* Media query for screens less than 480px */
+@media (max-width: 480px) {
+    .nav-list li a {
+        font-size: 16px;
+    }
+
+    .login-button .dropdown li a {
+        font-size: 16px;
+    }
+}
+
+
+/* Dashboard Section */
+.dashboard {
+    padding: 60px 20px;
+}
+
+.dashboard h2 {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.dashboard-cards {
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+}
+
+.dashboard-cards .card {
+    background-color: #fff;
+    padding: 20px;
+    margin: 10px;
+    border-radius: 5px;
+    width: calc(33.333% - 40px);
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    animation: fadeInUp 2s ease-out;
+}
+
+.dashboard-cards .card i {
+    font-size: 50px;
+    color: #007bff;
+    margin-bottom: 10px;
+}
+
+.dashboard-cards .card h3 {
+    margin-top: 10px;
+    color: #333;
+}
+
+.dashboard-cards .card a {
+    color: #007bff;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.dashboard-cards .card a:hover {
+    text-decoration: underline;
+}
+
+.dashboard-cards .card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+}
+
+/* Patients, Inventory, Services, Appointments Sections */
+.patients, .inventory, .services, .appointments {
+    padding: 60px 20px;
+}
+
+.patients h2, .inventory h2, .services h2, .appointments h2 {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.patients p, .inventory p, .services p, .appointments p {
+    text-align: center;
+    font-size: 1.1em;
+    margin-bottom: 40px;
+}
+
+.service-cards {
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+}
+
+.service-cards .card {
+    background-color: #fff;
+    padding: 20px;
+    margin: 10px;
+    border-radius: 5px;
+    width: calc(33.333% - 40px);
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    animation: fadeInUp 2s ease-out;
+}
+
+.service-cards .card i {
+    font-size: 50px;
+    color: #007bff;
+    margin-bottom: 10px;
+}
+
+.service-cards .card h3 {
+    margin-top: 10px;
+    color: #333;
+}
+
+.service-cards .card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+}
+
+.service-cards .card a {
+    color: #007bff;
+    text-decoration: none;
+    font-weight: bold;
+    margin-bottom: 10vh;
+}
+
+.service-cards .card a:hover {
+    text-decoration: underline;
+}
+
+/* Footer */
+footer {
+    background-color: #333;
+    color: #fff;
+    text-align: center;
+    padding: 20px 0;
+}
+
+/* Responsive Styles */
+@media (max-width: 768px) {
+    header .container {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    header nav ul {
+        flex-direction: column;
+        width: 100%;
+        background-color: #0056b3;
+    }
+
+    header nav ul li {
+        margin-left: 0;
+        margin-bottom: 10px;
+    }
+
+    .dashboard-cards .card, .service-cards .card {
+        width: calc(100% - 40px);
+    }
+}
+

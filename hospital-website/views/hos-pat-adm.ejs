@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Hospital Dashboard</title>
+    <link rel="stylesheet" href="/hos-pat-adm.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
+    />
+  </head>
+  <body>
+    <header>
+        <div class="container">
+            <h1 class="hos_name"><%= user.hospital_name %></h1>
+            <nav>
+                <div class="menu-icon">
+                    <i class="fas fa-bars"></i>
+                </div>
+                <ul class="nav-list">
+                    <li><a href="#dashboard">Dashboard</a></li>
+                    <li><a href="#patients">Patient</a></li>
+                    <li><a href="#inventory">Inventory</a></li>
+                    <li><a href="#services">Services</a></li>
+                    <li><a href="#appointments">Appointments</a></li>
+                    <li class="login-button">
+                        <form action="/logout" method="POST">
+                            <button type="submit" class="btttn">Log Out</button>
+                        </form>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+    
+    <section id="admissions">
+        <div class="container">
+          <h2>Patient Admission Requests</h2>
+          <table>
+            <thead>
+              <tr>
+                <th>Name</th>
+                <th>Age</th>
+                <th>Contact</th>
+                <th>Report</th>
+                <th>Prescription</th>
+                <th>Status</th>
+                <th>Actions</th>
+              </tr>
+            </thead>
+            <tbody>
+              <% admissions.forEach(admission => { %>
+                <tr>
+                  <td><%= admission.patientName %></td>
+                  <td><%= admission.age %></td>
+                  <td><%= admission.contactNumber %></td>
+                  <td><a href="/uploads/<%= admission.report %>" target="_blank">View Report</a></td>
+                  <td><a href="/uploads/<%= admission.prescription %>" target="_blank">View Prescription</a></td>
+                  <td><%= admission.status %></td>
+                  <td>
+                    <% if (admission.status === 'Pending') { %>
+                      <form action="/hos-dashboard/admissions/<%= admission.id %>/accept" method="POST" style="display:inline;">
+                        <button type="submit">Accept</button>
+                      </form>
+                      <form action="/hos-dashboard/admissions/<%= admission.id %>/reject" method="POST" style="display:inline;">
+                        <button type="submit">Reject</button>
+                      </form>
+                    <% } %>
+                  </td>
+                </tr>
+              <% }) %>
+            </tbody>
+          </table>
+          
+      </section>
+
+    
+
+    <footer>
+      <div class="container">
+        <p>&copy; 2024 Hospital Name. All rights reserved.</p>
+      </div>
+    </footer>
+  </body>
+</html>

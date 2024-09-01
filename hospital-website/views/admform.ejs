@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Patient Admission Form</title>
+    <link rel="stylesheet" href="/admform.css">
+</head>
+<body>
+    <header>
+        <div class="container">
+            <h1 class="hos_name">Hospital Name</h1>
+            <nav>
+                <div class="menu-icon">
+                    <i class="fas fa-bars"></i>
+                </div>
+                <ul class="nav-list">
+                    <li><a href="/dashboard#home">Home</a></li>
+                    <li><a href="/dashboard#about">Patient</a></li>
+                    <li><a href="/dashboard#services">Services</a></li>
+                    <li><a href="/dashboard#testimonials">Testimonials</a></li>
+                    <li><a href="/dashboard#contact">Contact Us</a></li>
+                    <li class="login-button">
+                        <form action="/logout" method="POST">
+                            <button type="submit" class="btttn">Log Out</button>
+                        </form>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Admission Form Section -->
+    <section id="admission-form" class="admission-form-section">
+        <div class="container">
+          <h2>Patient Admission Form</h2>
+          <form
+            action="/dashboard/adm-pat/sub-adm-form/submit-admission"
+            method="POST"
+            enctype="multipart/form-data"
+            class="admission-form"
+          >
+            <div class="form-group">
+              <label for="patientName">Patient Name:</label>
+              <input
+                type="text"
+                id="patientName"
+                name="patientName"
+                placeholder="Enter patient's full name"
+                required
+              />
+            </div>
+  
+            <div class="form-group">
+              <label for="age">Age:</label>
+              <input
+                type="number"
+                id="age"
+                name="age"
+                placeholder="Enter patient's age"
+                required
+              />
+            </div>
+  
+            <div class="form-group">
+              <label for="gender">Gender:</label>
+              <select id="gender" name="gender" required>
+                <option value="" disabled selected>Select gender</option>
+                <option value="Male">Male</option>
+                <option value="Female">Female</option>
+                <option value="Other">Other</option>
+              </select>
+            </div>
+  
+            <div class="form-group">
+              <label for="contactNumber">Contact Number:</label>
+              <input
+                type="tel"
+                id="contactNumber"
+                name="contactNumber"
+                placeholder="Enter contact number"
+                required
+              />
+            </div>
+  
+            <div class="form-group">
+              <label for="address">Address:</label>
+              <textarea
+                id="address"
+                name="address"
+                rows="4"
+                placeholder="Enter patient's address"
+                required
+              ></textarea>
+            </div>
+  
+            <div class="form-group">
+                <label for="hospital">Select Hospital:</label>
+                <select id="hospital" name="hospital" required>
+                  <option value="" disabled selected>Select hospital</option>
+                  <% hospitals.forEach(function(hospital) { %>
+                    <option value="<%= hospital.registration_no %>"><%= hospital.hospital_name %></option>
+                  <% }); %>
+                </select>
+              </div>
+  
+            <div class="form-group">
+              <label for="report">Upload Report:</label>
+              <input type="file" id="report" name="report" accept=".pdf,.jpg,.png" required />
+            </div>
+  
+            <div class="form-group">
+              <label for="prescription">Upload Prescription:</label>
+              <input
+                type="file"
+                id="prescription"
+                name="prescription"
+                accept=".pdf,.jpg,.png"
+                required
+              />
+            </div>
+  
+            <button type="submit" class="submit-btn">Submit Admission</button>
+          </form>
+        </div>
+      </section>
+  
+      <!-- Footer -->
+      <footer>
+        <div class="container">
+          <p>&copy; 2024 Hospital Name. All rights reserved.</p>
+        </div>
+      </footer>
+  
+      <!-- Custom JS -->
+      <!-- <script src="/js/script.js"></script> -->
+    </body>
+  </html>

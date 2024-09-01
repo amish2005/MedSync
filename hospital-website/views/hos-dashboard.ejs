@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Hospital Dashboard</title>
+    <link rel="stylesheet" href="/styles3.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
+    />
+  </head>
+  <body>
+    <header>
+        <div class="container">
+            <h1 class="hos_name"><%= hospitalName%></h1>
+            <nav>
+                <div class="menu-icon">
+                    <i class="fas fa-bars"></i>
+                </div>
+                <ul class="nav-list">
+                    <li><a href="#dashboard">Dashboard</a></li>
+                    <li><a href="#patients">Patient</a></li>
+                    <li><a href="#inventory">Inventory</a></li>
+                    <li><a href="#services">Services</a></li>
+                    <li><a href="#appointments">Appointments</a></li>
+                    <li class="login-button">
+                        <form action="/logout" method="POST">
+                            <button type="submit" class="btttn">Log Out</button>
+                        </form>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+      
+
+    <section id="dashboard" class="dashboard">
+      <div class="container">
+        <h2>Dashboard</h2>
+        <div class="dashboard-cards">
+          <div class="card">
+            <i class="fas fa-bed"></i>
+            <h3>Bed Availability</h3>
+            <p>Monitor the current bed availability in real-time.</p>
+            <a href="http://localhost:3000/hos-dashboard/bed-availability" class="btn">View Details</a>
+          </div>
+          <div class="card">
+            <i class="fas fa-user-md"></i>
+            <h3>Patient Admissions</h3>
+            <p>Track patient admission status.</p>
+            <a href="#patient-admissions" class="btn">View Details</a>
+          </div>
+          <div class="card">
+            <i class="fas fa-calendar-day"></i>
+            <h3>OPD</h3>
+            <p>Track live OPD appointments.</p>
+            <a href="#appointments" class="btn">View Details</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="patients" class="patients">
+      <div class="container">
+        <h2>Patients</h2>
+        <p>Manage patient records and view their history.</p>
+        <!-- Add additional content or functionality here -->
+      </div>
+    </section>
+
+    <section id="inventory" class="inventory">
+      <div class="container">
+        <h2>Inventory</h2>
+        <p>Track medical supplies and equipment inventory.</p>
+        <!-- Add additional content or functionality here -->
+      </div>
+    </section>
+
+    <section id="services" class="services">
+      <div class="container">
+        <h2>Manage Hospital</h2>
+        <div class="service-cards">
+          <div class="card">
+            <i class="fas fa-ambulance"></i>
+            <h3>Edit Bed Availability</h3>
+            
+            <p>Manage the current bed availability.</p>
+            <a href="#bed-availability" class="btn">Manage</a>
+          </div>
+          <div class="card">
+            <i class="fas fa-procedures"></i>
+            <h3>Update Inventory</h3>
+            
+            <p>Manage and predict medical supplies and equipment inventory.</p>
+          <a href="#bed-availability" class="btn">Manage</a>
+        </div>
+          <div class="card">
+            <i class="fas fa-stethoscope"></i>
+            <h3>Manage Appointments</h3>
+            
+            <p>Manage future appointments.</p>
+            <a href="#bed-availability" class="btn">Manage</a>
+          </div>
+
+          <div class="card">
+            <i class="fas fa-stethoscope"></i>
+            <h3>Manage Patient Admissions</h3>
+            
+            <p>Convenient outpatient services for all your needs.</p>
+            <a href="http://localhost:3000/hos-dashboard/admissions" class="btn">Manage</a>
+          </div>
+
+          <div class="card">
+            <i class="fas fa-stethoscope"></i>
+            <h3>Manage Doctors</h3>
+            
+            <p>Manage and Update Doctor Profiles.</p>
+            <a href="#bed-availability" class="btn">Manage</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="appointments" class="appointments">
+      <div class="container">
+        <h2>Appointments</h2>
+        <p>Manage and schedule patient appointments efficiently.</p>
+        <!-- Add additional content or functionality here -->
+      </div>
+    </section>
+
+    <footer>
+      <div class="container">
+        <p>&copy; 2024 Hospital Name. All rights reserved.</p>
+      </div>
+    </footer>
+  </body>
+</html>

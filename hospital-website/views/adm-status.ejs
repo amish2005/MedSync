@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admission Status</title>
+    <link rel="stylesheet" href="/adm-status.css">
+</head>
+<body>
+    <header>
+        <div class="container">
+            <h1 class="hos_name">Hospital Name</h1>
+            <nav>
+                <div class="menu-icon">
+                    <i class="fas fa-bars"></i>
+                </div>
+                <ul class="nav-list">
+                    <li><a href="http://localhost:3000/dashboard#home">Home</a></li>
+                    <li><a href="http://localhost:3000/dashboard#about">Patient</a></li>
+                    <li><a href="http://localhost:3000/dashboard#services">Services</a></li>
+                    <li><a href="http://localhost:3000/dashboard#testimonials">Testimonials</a></li>
+                    <li><a href="http://localhost:3000/dashboard#contact">Contact Us</a></li>
+                    <li class="login-button">
+                      <form action="/logout" method="POST">
+                          <button type="submit" class="btttn">Log Out</button>
+                      </form>
+                  </li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main class="application-submitted">
+        <div>
+            <h2>Your Application Status</h2>
+            <p>Your application status is: <strong><%= status %></strong></p>
+            <a href="/" class="home-btn">Go Back</a>
+        </div>
+    </main>
+
+    <footer>
+        <div class="container">
+          <p>&copy; 2024 Hospital Name. All rights reserved.</p>
+        </div>
+      </footer>
+</body>
+</html>

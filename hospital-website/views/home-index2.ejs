@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Bed Availability Dashboard</title>
-    <link rel="stylesheet" href="/styles2.css" />
+    <link rel="stylesheet" href="/styles4.css" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css" />
     <script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
@@ -33,7 +33,7 @@
                         <a href="javascript:void(0)">Login / SignUp</a>
                         <ul class="dropdown">
                             <li><a href="http://localhost:3000/">Patient Login</a></li>
-                            <li><a href="hos-login.html">Hospital Login</a></li>
+                            <li><a href="http://localhost:3000/hosp-login">Hospital Login</a></li>
                             <li><a href="http://localhost:3000/signup">Sign Up</a></li>
                         </ul>
                     </li>
@@ -47,38 +47,40 @@
         <div class="container">
             <h2 data-aos="fade-up">Bed Availability Dashboard</h2>
             <p data-aos="fade-up" data-aos-delay="200">
-                Monitor real-time bed availability across all hospital departments.
+                Monitor real-time bed availability across all hospitals.
             </p>
+
+            <p class="live-text">LIVE</p>
             <div class="bed-availability">
                 <div class="department-card" data-aos="fade-up" data-aos-delay="400">
                     <h3>ICU</h3>
-                    <p>Available Beds: <span class="available">5</span></p>
-                    <p>Total Beds: 20</p>
+                    <p>Available Beds: <span class="available"><%= availableICU %></span></p>
+                    <p>Total Beds: <%= totalICU %> </p>
                 </div>
                 <div class="department-card" data-aos="fade-up" data-aos-delay="600">
                     <h3>General Ward</h3>
-                    <p>Available Beds: <span class="available">15</span></p>
-                    <p>Total Beds: 50</p>
+                    <p>Available Beds: <span class="available"><%= availableGW %></span></p>
+                    <p>Total Beds: <%= totalGW %></p>
                 </div>
                 <div class="department-card" data-aos="fade-up" data-aos-delay="800">
                     <h3>Maternity Ward</h3>
-                    <p>Available Beds: <span class="available">8</span></p>
-                    <p>Total Beds: 30</p>
+                    <p>Available Beds: <span class="available"><%= availableMW %></span></p>
+                    <p>Total Beds: <%= totalMW %></p>
                 </div>
                 <div class="department-card" data-aos="fade-up" data-aos-delay="1000">
                     <h3>Emergency</h3>
-                    <p>Available Beds: <span class="available">24</span></p>
-                    <p>Total Beds: 80</p>
+                    <p>Available Beds: <span class="available"> <%= availableEW %> </span></p>
+                    <p>Total Beds: <%= totalEW %></p>
                 </div>
                 <div class="department-card" data-aos="fade-up" data-aos-delay="1200">
                     <h3>ICCU</h3>
-                    <p>Available Beds: <span class="available">24</span></p>
-                    <p>Total Beds: 40</p>
+                    <p>Available Beds: <span class="available"><%= availableICCU %></span></p>
+                    <p>Total Beds: <%= totalICCU %></p>
                 </div>
                 <div class="department-card" data-aos="fade-up" data-aos-delay="1400">
                     <h3>CCU</h3>
-                    <p>Available Beds: <span class="available">32</span></p>
-                    <p>Total Beds: 70</p>
+                    <p>Available Beds: <span class="available"><%= availableCCU %></span></p>
+                    <p>Total Beds: <%= totalCCU %></p>
                 </div>
             </div>
         </div>

@@ -463,48 +463,9 @@ footer {
     margin-bottom: 10px;
 }
 
-/* Dropdown Menu Styles */
-.login-button {
-    position: relative;
-    margin-right: 1vw;
-}
 
-.login-button .dropdown {
-    display: none;
-    position: absolute;
-    top: 100%;
-    right: 0;
-    background-color: darkblue;
-    padding: 10px 0;
-    border-radius: 5px;
-    min-width: 150px;
-    z-index: 1000;
-}
 
-.login-button .dropdown li {
-    list-style: none;
-    margin: 0;
-    
-}
 
-.login-button .dropdown li a {
-    display: block;
-    padding: 10px 15px;
-    color: #fff;
-    text-decoration: none;
-    font-size: 14px;
-    border-radius: 5px;
-    transition: background-color 0.3s ease;
-}
-
-.login-button .dropdown li a:hover {
-    background-color: #007bff;
-}
-
-/* Show dropdown on hover */
-.login-button:hover .dropdown {
-    display: block;
-}
 
 /* Hide menu icon on larger screens */
 .menu-icon {
@@ -551,19 +512,8 @@ footer {
         padding: 15px 0;
         border-bottom: 1px solid rgba(255, 255, 255, 0.2);
     }
-
-    /* Adjust dropdown for mobile */
-    .login-button .dropdown {
-        position: static;
-        width: 100%;
-        box-shadow: none;
-        background-color: #0056b3;
-    }
-
-    .login-button .dropdown li a {
-        padding: 15px 0;
-    }
 }
+   
 
 /* Media query for screens less than 480px */
 @media (max-width: 480px) {
@@ -576,17 +526,39 @@ footer {
     }
 }
 
-.btttn {
-    background-color: #003366; /* Dark Blue Background */
-    color: white; /* White text color */
-    border: none;
-    padding: 10px 20px;
-    font-size: 16px;
-    border-radius: 5px;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-}
 
-.btttn:hover {
-    background-color: #0056b3; /* Darker blue on hover */
-}
+        .live-text {
+            font-size: 1rem;
+            font-weight: bold;
+            color: red;
+            text-transform: uppercase;
+            letter-spacing: 0.2rem;
+            text-shadow: 2px 2px 5px rgba(255, 0, 0, 0.5);
+            animation: blink 1s infinite;
+            
+        }
+
+        @keyframes blink {
+            0%, 100% {
+                opacity: 1;
+            }
+            50% {
+                opacity: 0.5;
+            }
+        }
+  
+
+        .btttn {
+            background-color: #003366; /* Dark Blue Background */
+            color: white; /* White text color */
+            border: none;
+            padding: 10px 20px;
+            font-size: 16px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+        
+        .btttn:hover {
+            background-color: #0056b3; /* Darker blue on hover */
+        }
