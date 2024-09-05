@@ -866,7 +866,7 @@ app.get('/book-appointment/:scheduleId', (req, res) => {
 
 
 app.get("/book-appointment/:scheduleID/submitted", (req, res) => {
-    const query = `SELECT patient_id, patient_name, timings, patient_age, patient_gender, DATE_FORMAT(schedule_date, '%d-%m-%Y') AS formatted_date FROM appointment_date_timing ORDER BY appointment_id DESC 
+    const query = `SELECT patient_id, patient_name, timings, patient_age, patient_gender, DATE_FORMAT(schedule_date, '%d-%m-%Y') AS formatted_date FROM appointment_date_timingss ORDER BY appointment_id DESC 
   LIMIT 1;`;
 
   db.query(query, (err, results) => {
@@ -907,6 +907,38 @@ app.get("/book-appointment/:scheduleID/submitted", (req, res) => {
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+app.get('/hos-dashboard/app-manage', (req, res) => {
+    if (req.session.user) {
+      
+    
+    const sql = `SELECT appointment_timings, patient_contact, patient_name, patient_age, doctor_name
+                 FROM appointment_date_timing_reg_name WHERE hospital_reg_no = ?`;
+
+    db.query(sql, [req.session.user.registration_no], (err, results) => {
+        if (err) throw err;
+        res.render('hos-opd-manage', { appointments: results });
+    });
+}
+});
 
 
 

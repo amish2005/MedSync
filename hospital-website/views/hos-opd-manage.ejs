@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Appointment Details</title>
+    <link rel="stylesheet" href="/hos-opd-manage.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <h1 class="hos_name">Hospital Name</h1>
+            <nav>
+                <ul class="nav-list">
+                    <li><a href="/dashboard#home">Home</a></li>
+                    <li><a href="/dashboard#about">Patient</a></li>
+                    <li><a href="/dashboard#services">Services</a></li>
+                    <li><a href="/dashboard#testimonials">Testimonials</a></li>
+                    <li><a href="/dashboard#contact">Contact Us</a></li>
+                    <li class="login-button">
+                        <form action="/logout" method="POST">
+                            <button type="submit" class="btttn">Log Out</button>
+                        </form>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <section class="schedule">
+        <div class="container">
+            <h2>Appointments</h2>
+            <input type="text" id="doctorSearch" placeholder="Search by Doctor's Name" onkeyup="searchDoctor()">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Appointment Timings</th>
+                        <th>Patient Contact</th>
+                        <th>Patient Name</th>
+                        <th>Patient Age</th>
+                        <th>Doctor Name</th>
+                    </tr>
+                </thead>
+                <tbody id="appointmentsTable">
+                    <% appointments.forEach(item => { %>
+                    <tr>
+                        <td><%= item.appointment_timings %></td>
+                        <td><%= item.patient_contact %></td>
+                        <td><%= item.patient_name %></td>
+                        <td><%= item.patient_age %></td>
+                        <td><%= item.doctor_name %></td>
+                    </tr>
+                    <% }) %>
+                </tbody>
+            </table>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2024 Hospital Name. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        function searchDoctor() {
+            let input = document.getElementById('doctorSearch').value.toLowerCase();
+            let rows = document.querySelectorAll('#appointmentsTable tr');
+
+            rows.forEach(row => {
+                let doctorName = row.cells[4].textContent.toLowerCase();
+                if (doctorName.includes(input)) {
+                    row.style.display = '';
+                } else {
+                    row.style.display = 'none';
+                }
+            });
+        }
+    </script>
+</body>
+</html>
