@@ -1,67 +1,70 @@
-/* Bed Availability Dashboard */
-.dashboard {
-    padding: 60px 20px;
-    background-color: #f9f9f9;
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    background-color: #f4f4f4;
 }
 
-.dashboard h2 {
-    text-align: center;
+
+
+section.dashboard {
+    padding: 20px;
+    background-color: #fff;
+    margin: 20px auto;
+    max-width: 1200px;
+}
+
+section.dashboard h2 {
+    font-size: 2rem;
+    margin-bottom: 10px;
+}
+
+section.dashboard p {
     margin-bottom: 20px;
-    animation: fadeInUp 2s ease-out;
 }
 
 .bed-availability {
     display: flex;
-    justify-content: space-around;
     flex-wrap: wrap;
-    margin-top: 40px;
+    gap: 20px;
 }
 
 .department-card {
-    background-color: #fff;
+    background: #fff;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     padding: 20px;
-    margin: 10px;
-    border-radius: 5px;
-    width: calc(25% - 40px);
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-    text-align: center;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-    animation: fadeInUp 2s ease-out;
+    flex: 1 1 30%;
 }
 
 .department-card h3 {
-    color: #007bff;
-    font-size: 24px;
-    margin-bottom: 10px;
+    margin-top: 0;
 }
 
-.department-card p {
-    font-size: 18px;
-    margin: 5px 0;
-}
-
-.available {
-    color: green;
+.department-card .available {
     font-weight: bold;
+    color: #333;
 }
 
-.department-card:hover {
-    transform: translateY(-10px);
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+.department-card form {
+    margin-top: 10px;
 }
 
-/* Responsive Styles */
-@media (max-width: 768px) {
-    .department-card {
-        width: calc(50% - 40px);
-    }
+.department-card form button {
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    padding: 10px;
+    margin-right: 5px;
+    cursor: pointer;
+    border-radius: 5px;
 }
 
-@media (max-width: 480px) {
-    .department-card {
-        width: calc(100% - 20px);
-    }
+.department-card form button:nth-of-type(2) {
+    background-color: #dc3545;
 }
+
 
 
 /* Global Styles */
@@ -184,196 +187,69 @@ header nav ul li.login-button a:hover {
     color: #fff;
 }
 
-/* About Section */
-.about {
+/* Dashboard Section */
+.dashboard {
     padding: 60px 20px;
-}
-
-.about h2 {
-    text-align: center;
-    margin-bottom: 20px;
-    animation: fadeInUp 2s ease-out;
-}
-
-.about p {
-    text-align: center;
-    font-size: 1.1em;
-    margin-bottom: 40px;
-    animation: fadeInUp 2s ease-out 0.5s;
-}
-
-.about-cards {
-    display: flex;
-    justify-content: space-around;
-    flex-wrap: wrap;
-}
-
-.about-cards .card {
-    background-color: #fff;
-    padding: 20px;
-    margin: 10px;
-    border-radius: 5px;
-    width: calc(33.333% - 40px);
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-    text-align: center;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-    animation: fadeInUp 2s ease-out;
-}
-
-.about-cards .card img {
-    width: 95%;
-    border-radius: 5px;
-    height: 36vh;
-    
-}
-
-.about-cards .card h3 {
-    margin-top: 10px;
-    color: #333333;
-    
-}
-
-.about-cards .card a {
-    
-    color: #333333;
-    text-decoration: none;
-    
-}
-
-.about-cards .card:hover {
-    transform: translateY(-10px);
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
-}
-
-/* Services Section */
-.services {
-    padding: 60px 20px;
-}
-
-.services h2 {
-    text-align: center;
-    margin-bottom: 20px;
-    animation: fadeInUp 2s ease-out;
-}
-
-.service-cards {
-    display: flex;
-    justify-content: space-around;
-    flex-wrap: wrap;
-}
-
-.service-cards .card {
-    background-color: #fff;
-    padding: 20px;
-    margin: 10px;
-    border-radius: 5px;
-    width: calc(50% - 40px);
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-    text-align: center;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-    animation: fadeInUp 2s ease-out;
-}
-
-.service-cards .card img {
-    width: 100%;
-    border-radius: 5px;
-    height: 50vh;
-}
-
-.service-cards .card h3 {
-    margin-top: 10px;
-    color: #333333;
-}
-
-.service-cards .card:hover {
-    transform: translateY(-10px);
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
-}
-
-/* Testimonials Section */
-.testimonials {
     background-color: #f9f9f9;
-    padding: 60px 20px;
 }
 
-.testimonials h2 {
+.dashboard h2 {
     text-align: center;
     margin-bottom: 20px;
     animation: fadeInUp 2s ease-out;
 }
 
-.testimonial-cards {
+.bed-availability {
     display: flex;
     justify-content: space-around;
     flex-wrap: wrap;
+    margin-top: 40px;
 }
 
-.testimonial-cards .card {
+.department-card {
     background-color: #fff;
     padding: 20px;
     margin: 10px;
     border-radius: 5px;
-    width: calc(33.333% - 40px);
+    width: calc(25% - 40px);
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
     text-align: center;
     transition: transform 0.3s ease, box-shadow 0.3s ease;
     animation: fadeInUp 2s ease-out;
 }
 
-.testimonial-cards .card p {
-    font-style: italic;
-}
-
-.testimonial-cards .card h3 {
-    margin-top: 10px;
+.department-card h3 {
     color: #007bff;
+    font-size: 24px;
+    margin-bottom: 10px;
 }
 
-.testimonial-cards .card:hover {
+.department-card p {
+    font-size: 18px;
+    margin: 5px 0;
+}
+
+.available {
+    color: green;
+    font-weight: bold;
+}
+
+.department-card:hover {
     transform: translateY(-10px);
     box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
 }
 
-/* Contact Section */
-.contact {
-    padding: 60px 20px;
-    background-color: #007bff;
-    color: #fff;
+/* Responsive Styles */
+@media (max-width: 768px) {
+    .department-card {
+        width: calc(50% - 40px);
+    }
 }
 
-.contact h2 {
-    text-align: center;
-    margin-bottom: 20px;
-    animation: fadeInUp 2s ease-out;
-}
-
-.contact p {
-    text-align: center;
-    font-size: 1.1em;
-    margin-bottom: 40px;
-    animation: fadeInUp 2s ease-out 0.5s;
-}
-
-.contact-info {
-    display: flex;
-    justify-content: space-around;
-    flex-wrap: wrap;
-}
-
-.contact-info .info {
-    margin: 10px;
-    text-align: center;
-}
-
-.contact-info .info i {
-    font-size: 30px;
-    margin-bottom: 10px;
-    transition: color 0.3s ease, transform 0.3s ease;
-}
-
-.contact-info .info i:hover {
-    color: #ffdd57;
-    transform: scale(1.1);
+@media (max-width: 480px) {
+    .department-card {
+        width: calc(100% - 20px);
+    }
 }
 
 /* Footer */
@@ -405,64 +281,6 @@ footer {
     }
 }
 
-/* Responsive Styles */
-@media (max-width: 768px) {
-    header .container {
-        flex-direction: column;
-        align-items: flex-start;
-    }
-
-    header nav ul {
-        flex-direction: column;
-        width: 100%;
-    }
-
-    header nav ul li {
-        margin-left: 0;
-        margin-bottom: 10px;
-    }
-
-    header nav ul li a {
-        display: block;
-        padding: 10px;
-        text-align: center;
-    }
-
-    .about-cards .card, 
-    .service-cards .card, 
-    .testimonial-cards .card {
-        width: calc(100% - 40px);
-    }
-}
-
-@media (max-width: 480px) {
-    .hero h2 {
-        font-size: 2em;
-    }
-
-    .hero p {
-        font-size: 1em;
-    }
-
-    .btn {
-        font-size: 14px;
-        padding: 8px 16px;
-    }
-
-    .about-cards .card, 
-    .service-cards .card, 
-    .testimonial-cards .card {
-        width: calc(100% - 20px);
-    }
-}
-
-
-.card i {
-    font-size: 50px;
-    color: #007bff;
-    margin-bottom: 10px;
-}
-
 /* Dropdown Menu Styles */
 .login-button {
     position: relative;
@@ -484,7 +302,6 @@ footer {
 .login-button .dropdown li {
     list-style: none;
     margin: 0;
-    
 }
 
 .login-button .dropdown li a {
@@ -576,26 +393,18 @@ footer {
     }
 }
 
-.live-text {
-    font-size: 1rem;
-    font-weight: bold;
-    color: red;
-    text-transform: uppercase;
-    letter-spacing: 0.2rem;
-    text-shadow: 2px 2px 5px rgba(255, 0, 0, 0.5);
-    animation: blink 1s infinite;
-    
+/* Button styling */
+.btttn {
+    background-color: #003366; /* Dark Blue Background */
+    color: white; /* White text color */
+    border: none;
+    padding: 10px 20px;
+    font-size: 16px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
 }
 
-@keyframes blink {
-    0%, 100% {
-        opacity: 1;
-    }
-    50% {
-        opacity: 0.5;
-    }
-}
-
-.links {
-    color: #320505;
+.btttn:hover {
+    background-color: #0056b3; /* Darker blue on hover */
 }

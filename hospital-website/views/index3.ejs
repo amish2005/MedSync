@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Bed Availability Dashboard</title>
-    <link rel="stylesheet" href="/styles4.css" />
+    <link rel="stylesheet" href="/styles5.css" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css" />
     <script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
@@ -30,64 +30,73 @@
                     <li><a href="http://localhost:3000/home#testimonials">Testimonials</a></li>
                     <li><a href="http://localhost:3000/home#contact">Contact Us</a></li>
                     <li class="login-button">
-                        <a href="javascript:void(0)">Login / SignUp</a>
-                        <ul class="dropdown">
-                            <li><a href="http://localhost:3000/">Patient Login</a></li>
-                            <li><a href="http://localhost:3000/hosp-login">Hospital Login</a></li>
-                            <li><a href="http://localhost:3000/signup">Sign Up</a></li>
-                        </ul>
+                        <form action="/logout" method="POST">
+                            <button type="submit" class="btttn">Log Out</button>
+                        </form>
                     </li>
                 </ul>
             </nav>
         </div>
     </header>
     
-
     <section id="dashboard" class="dashboard">
         <div class="container">
             <h2 data-aos="fade-up">Bed Availability Dashboard</h2>
-            <p data-aos="fade-up" data-aos-delay="200">
-                Monitor real-time bed availability across all hospitals.
-                
-            </p>
+            
 
+            <!-- Dropdown Menu and Search Button -->
+            <div class="hospital-selection" data-aos="fade-up" data-aos-delay="300">
+                <form action="http://localhost:3000/dashboard/bed-availability/search" method="get">
+                    <label for="hospital">Select Hospital:</label>
+                    <select name="hospital" id="hospital">
+                        
+                        <% hospitals.forEach(function(hospital) { %>
+                            <option value="<%= hospital.hospital_name %>"><%= hospital.hospital_name %></option>
+                        <% }); %>
+                    </select>
+                    <button type="submit" class="search-btn">Search</button>
+                </form>
+            </div>
+
+            <p data-aos="fade-up" data-aos-delay="200">
+                Monitor real-time bed availability across all departments of <%= hospital %> hospital.
+            </p>
             <p class="live-text">LIVE</p>
             <div class="bed-availability">
+                
                 <div class="department-card" data-aos="fade-up" data-aos-delay="400">
                     <h3>ICU</h3>
-                    <p>Available Beds: <span class="available"><%= availableICU %></span></p>
-                    <p>Total Beds: <%= totalICU %> </p>
+                    <p>Available Beds: <span class="available"><%= bedDetails.available_beds_ICU %></span></p>
+                    <p>Total Beds: <%= bedDetails.total_beds_ICU %></p>
                 </div>
                 <div class="department-card" data-aos="fade-up" data-aos-delay="600">
                     <h3>General Ward</h3>
-                    <p>Available Beds: <span class="available"><%= availableGW %></span></p>
-                    <p>Total Beds: <%= totalGW %></p>
+                    <p>Available Beds: <span class="available"><%= bedDetails.available_beds_GW %></span></p>
+                    <p>Total Beds: <%= bedDetails.total_beds_GW %></p>
                 </div>
                 <div class="department-card" data-aos="fade-up" data-aos-delay="800">
                     <h3>Maternity Ward</h3>
-                    <p>Available Beds: <span class="available"><%= availableMW %></span></p>
-                    <p>Total Beds: <%= totalMW %></p>
+                    <p>Available Beds: <span class="available"><%= bedDetails.available_beds_MW %></span></p>
+                    <p>Total Beds: <%= bedDetails.total_beds_MW %></p>
                 </div>
                 <div class="department-card" data-aos="fade-up" data-aos-delay="1000">
                     <h3>Emergency</h3>
-                    <p>Available Beds: <span class="available"> <%= availableEW %> </span></p>
-                    <p>Total Beds: <%= totalEW %></p>
+                    <p>Available Beds: <span class="available"> <%= bedDetails.available_beds_EW %> </span></p>
+                    <p>Total Beds: <%= bedDetails.total_beds_EW %></p>
                 </div>
                 <div class="department-card" data-aos="fade-up" data-aos-delay="1200">
                     <h3>ICCU</h3>
-                    <p>Available Beds: <span class="available"><%= availableICCU %></span></p>
-                    <p>Total Beds: <%= totalICCU %></p>
+                    <p>Available Beds: <span class="available"><%= bedDetails.available_beds_ICCU %></span></p>
+                    <p>Total Beds: <%= bedDetails.total_beds_ICCU %></p>
                 </div>
                 <div class="department-card" data-aos="fade-up" data-aos-delay="1400">
                     <h3>CCU</h3>
-                    <p>Available Beds: <span class="available"><%= availableCCU %></span></p>
-                    <p>Total Beds: <%= totalCCU %></p>
+                    <p>Available Beds: <span class="available"><%= bedDetails.available_beds_CCU %></span></p>
+                    <p>Total Beds: <%= bedDetails.total_beds_CCU %></p>
                 </div>
             </div>
         </div>
     </section>
-
-    <a class="links" href="http://localhost:3000/">Login here to view the hospital wise availability of beds.</a>
 
     <footer>
         <div class="container">

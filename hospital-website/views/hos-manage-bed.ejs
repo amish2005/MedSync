@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Bed Availability Dashboard</title>
+    <link rel="stylesheet" href="/hos-manage-bed.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css" />
+    <script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            AOS.init();
+        });
+    </script>
+    <style>
+        .live-text {
+            font-size: 1rem;
+            font-weight: bold;
+            color: red;
+            text-transform: uppercase;
+            letter-spacing: 0.2rem;
+            text-shadow: 2px 2px 5px rgba(255, 0, 0, 0.5);
+            animation: blink 1s infinite;
+        }
+
+        @keyframes blink {
+            0%, 100% {
+                opacity: 1;
+            }
+            50% {
+                opacity: 0.5;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <h1 class="hos_name"><%= hospitalName %></h1>
+            <nav>
+                <div class="menu-icon">
+                    <i class="fas fa-bars"></i>
+                </div>
+                <ul class="nav-list">
+                    <li><a href="#dashboard">Dashboard</a></li>
+                    <li><a href="#patients">Patient</a></li>
+                    <li><a href="#inventory">Inventory</a></li>
+                    <li><a href="#services">Services</a></li>
+                    <li><a href="#appointments">Appointments</a></li>
+                    <li class="login-button">
+                        <form action="/logoutt" method="POST">
+                            <button type="submit" class="btttn">Log Out</button>
+                        </form>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <section id="dashboard" class="dashboard">
+        <div class="container">
+            <h2 data-aos="fade-up">Bed Availability Dashboard</h2>
+            <p data-aos="fade-up" data-aos-delay="200">
+                Monitor real-time bed availability across all hospital departments.
+            </p>
+            <p class="live-text">LIVE</p>
+            <div class="bed-availability">
+                <div class="department-card" data-aos="fade-up" >
+                    <h3>ICU</h3>
+                    <p>Available Beds: <span class="available"><%= availableBedsICU %></span></p>
+                    <p>Total Beds: <%= totalBedsICU %></p>
+                    <form action="/update-beds" method="POST">
+                        <input type="hidden" name="department" value="ICU" />
+                        <button type="submit" name="action" value="push">Push</button>
+                        <button type="submit" name="action" value="pull">Pull</button>
+                    </form>
+                </div>
+                <div class="department-card" data-aos="fade-up" >
+                    <h3>General Ward</h3>
+                    <p>Available Beds: <span class="available"><%= availableBedsGW %></span></p>
+                    <p>Total Beds: <%= totalBedsGW %></p>
+                    <form action="/update-beds" method="POST">
+                        <input type="hidden" name="department" value="General Ward" />
+                        <button type="submit" name="action" value="push">Push</button>
+                        <button type="submit" name="action" value="pull">Pull</button>
+                    </form>
+                </div>
+                <div class="department-card" data-aos="fade-up" >
+                    <h3>Maternity Ward</h3>
+                    <p>Available Beds: <span class="available"><%= availableBedsMW %></span></p>
+                    <p>Total Beds: <%= totalBedsMW %></p>
+                    <form action="/update-beds" method="POST">
+                        <input type="hidden" name="department" value="Maternity Ward" />
+                        <button type="submit" name="action" value="push">Push</button>
+                        <button type="submit" name="action" value="pull">Pull</button>
+                    </form>
+                </div>
+                <div class="department-card" data-aos="fade-up" >
+                    <h3>Emergency</h3>
+                    <p>Available Beds: <span class="available"><%= availableBedsEW %></span></p>
+                    <p>Total Beds: <%= totalBedsEW %></p>
+                    <form action="/update-beds" method="POST">
+                        <input type="hidden" name="department" value="Emergency" />
+                        <button type="submit" name="action" value="push">Push</button>
+                        <button type="submit" name="action" value="pull">Pull</button>
+                    </form>
+                </div>
+                <div class="department-card" data-aos="fade-up" >
+                    <h3>ICCU</h3>
+                    <p>Available Beds: <span class="available"><%= availableBedsICCU %></span></p>
+                    <p>Total Beds: <%= totalBedsICCU %></p>
+                    <form action="/update-beds" method="POST">
+                        <input type="hidden" name="department" value="ICCU" />
+                        <button type="submit" name="action" value="push">Push</button>
+                        <button type="submit" name="action" value="pull">Pull</button>
+                    </form>
+                </div>
+                <div class="department-card" data-aos="fade-up" >
+                    <h3>CCU</h3>
+                    <p>Available Beds: <span class="available"><%= availableBedsCCU %></span></p>
+                    <p>Total Beds: <%= totalBedsCCU %></p>
+                    <form action="/update-beds" method="POST">
+                        <input type="hidden" name="department" value="CCU" />
+                        <button type="submit" name="action" value="push">Push</button>
+                        <button type="submit" name="action" value="pull">Pull</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2024 Hospital Name. All rights reserved.</p>
+        </div>
+    </footer>
+</body>
+</html>

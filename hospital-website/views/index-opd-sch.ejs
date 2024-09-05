@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Doctor's Schedule</title>
+    <link rel="stylesheet" href="/index-opd-sch.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <h1 class="hos_name">Hospital Name</h1>
+            <nav>
+                <ul class="nav-list">
+                    <li><a href="/dashboard#home">Home</a></li>
+                    <li><a href="/dashboard#about">Patient</a></li>
+                    <li><a href="/dashboard#services">Services</a></li>
+                    <li><a href="/dashboard#testimonials">Testimonials</a></li>
+                    <li><a href="/dashboard#contact">Contact Us</a></li>
+                    <li class="login-button">
+                        <form action="/logout" method="POST">
+                            <button type="submit" class="btttn">Log Out</button>
+                        </form>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+ 
+
+
+<section class="schedule">
+    <div class="container">
+        <h2>Doctor's Schedule</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>Date</th>
+                    <th>Timings</th>
+                    <th>Contact Number</th>
+                    <th>Doctor Name</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                <% schedule.forEach(item => { %>
+                <tr>
+                    <td><%= item.date %></td>
+                    <td><%= item.timings %></td>
+                    <td><%= item.contact %></td>
+                    <td><%= item.doctor_name %></td>
+                    <td><a href="/book-appointment/<%= item.schedule_id %>" class="btttn">Book Appointment</a></td>
+                </tr>
+                <% }) %>
+            </tbody>
+        </table>
+    </div>
+</section>
+
+<!-- ...footer code... -->
+
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2024 Hospital Name. All rights reserved.</p>
+        </div>
+    </footer>
+</body>
+</html>

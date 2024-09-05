@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>OPD Booking</title>
+    <link rel="stylesheet" href="/common.css" />
+</head>
+<body>
+    <header>
+        <div class="container">
+          <h1 class="hos_name">Hospital Name</h1>
+          <nav>
+            <div class="menu-icon">
+              <i class="fas fa-bars"></i>
+            </div>
+            <ul class="nav-list">
+              <li><a href="/dashboard#home">Home</a></li>
+              <li><a href="/dashboard#about">Patient</a></li>
+              <li><a href="/dashboard#services">Services</a></li>
+              <li><a href="/dashboard#testimonials">Testimonials</a></li>
+              <li><a href="/dashboard#contact">Contact Us</a></li>
+              <li class="login-button">
+                <form action="/logout" method="POST">
+                  <button type="submit" class="btttn">Log Out</button>
+                </form>
+              </li>
+            </ul>
+          </nav>
+        </div>
+      </header>
+
+      <section class="opd-booking">
+        <div class="containers">
+          <h2>Book an Appointment</h2>
+          <form id="bookingForm" action="/dashboard/opd/sel-hosp1/get-doctors2" method="GET">
+            <div class="form-group">
+              <label for="hospital">Select Hospital</label>
+              <select name="hospital" id="hospital" class="form-control" required>
+                <option value="">Select Hospital</option>
+                <% hospitals.forEach(function(hospital) { %>
+                  <option value="<%= hospital.id %>"><%= hospital.name %></option>
+                <% }); %>
+              </select>
+            </div>
+
+           
+
+            <div class="form-group">
+                
+              <button type="submit" class="btn">NEXT</button>
+            </div>
+          </form>
+        </div>
+      </section>
+
+      
+</body>
+</html>

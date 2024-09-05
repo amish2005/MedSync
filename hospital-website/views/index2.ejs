@@ -13,7 +13,6 @@
             AOS.init();
         });
     </script>
-    
 </head>
 <body>
     <header>
@@ -24,13 +23,14 @@
                     <i class="fas fa-bars"></i>
                 </div>
                 <ul class="nav-list">
-                    <li><a href="http://localhost:3000/dashboard#home">Home</a></li>
-                    <li><a href="http://localhost:3000/dashboard#about">Patient</a></li>
-                    <li><a href="http://localhost:3000/dashboard#services">Services</a></li>
-                    <li><a href="http://localhost:3000/dashboard#testimonials">Testimonials</a></li>
-                    <li><a href="http://localhost:3000/dashboard#contact">Contact Us</a></li>
+                    <li><a href="http://localhost:3000/home#home">Home</a></li>
+                    <li><a href="http://localhost:3000/home#about">Patient</a></li>
+                    <li><a href="inventory.com">Inventory</a></li>
+                    <li><a href="http://localhost:3000/home#services">Services</a></li>
+                    <li><a href="http://localhost:3000/home#testimonials">Testimonials</a></li>
+                    <li><a href="http://localhost:3000/home#contact">Contact Us</a></li>
                     <li class="login-button">
-                        <form action="/logoutt" method="POST">
+                        <form action="/logout" method="POST">
                             <button type="submit" class="btttn">Log Out</button>
                         </form>
                     </li>
@@ -39,20 +39,35 @@
         </div>
     </header>
     
-    
-
     <section id="dashboard" class="dashboard">
         <div class="container">
             <h2 data-aos="fade-up">Bed Availability Dashboard</h2>
+            
+
+            <!-- Dropdown Menu and Search Button -->
+            <div class="hospital-selection" data-aos="fade-up" data-aos-delay="300">
+                <form action="http://localhost:3000/dashboard/bed-availability/search" method="get">
+                    <label for="hospital">Select Hospital:</label>
+                    <select name="hospital" id="hospital">
+                        <option value="" disabled selected>All</option>
+                        <% hospitals.forEach(function(hospital) { %>
+                            <option value="<%= hospital.hospital_name %>"><%= hospital.hospital_name %></option>
+                        <% }); %>
+                    </select>
+                    <button type="submit" class="search-btn">Search</button>
+                </form>
+            </div>
+
             <p data-aos="fade-up" data-aos-delay="200">
-                Welcome, <%= user.name %>, to the real-time bed availability dashboard across all hospitals.
+                Monitor real-time bed availability across all hospitals.
             </p>
             <p class="live-text">LIVE</p>
             <div class="bed-availability">
+                
                 <div class="department-card" data-aos="fade-up" data-aos-delay="400">
                     <h3>ICU</h3>
                     <p>Available Beds: <span class="available"><%= availableICU %></span></p>
-                    <p>Total Beds: <%= totalICU %> </p>
+                    <p>Total Beds: <%= totalICU %></p>
                 </div>
                 <div class="department-card" data-aos="fade-up" data-aos-delay="600">
                     <h3>General Ward</h3>

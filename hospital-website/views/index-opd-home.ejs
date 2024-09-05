@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Patient Admission</title>
+    <link rel="stylesheet" href="/pat-adm.css" />
+  </head>
+  <body>
+    <header>
+      <div class="container">
+        <h1 class="hos_name"><Hospital Name></h1>
+        <nav>
+          <div class="menu-icon">
+            <i class="fas fa-bars"></i>
+          </div>
+          <ul class="nav-list">
+            <li><a href="/dashboard#home">Home</a></li>
+            <li><a href="/dashboard#about">Patient</a></li>
+            <li><a href="/dashboard#services">Services</a></li>
+            <li><a href="/dashboard#testimonials">Testimonials</a></li>
+            <li><a href="/dashboard#contact">Contact Us</a></li>
+            <li class="login-button">
+              <form action="/logout" method="POST">
+                <button type="submit" class="btttn">Log Out</button>
+              </form>
+            </li>
+          </ul>
+        </nav>
+      </div>
+    </header>
+
+    <section id="admission" class="admission">
+      <div class="container">
+        <h2>OPD</h2>
+        <div class="admission-cards">
+          <div class="card">
+            <a href="http://localhost:3000/dashboard/opd/sel-hosp1">
+              
+            </a>
+            <h3><a href="http://localhost:3000/dashboard/opd/sel-hosp1">View Doctor's Schedule & Book Appointment</a></h3>
+            <p>
+              Easily check a doctor availability and secure your appointment online.
+            </p>
+          </div>
+          
+        </div>
+      </div>
+    </section>
+
+    <footer>
+      <div class="container">
+        <p>&copy; 2024 Hospital Name. All rights reserved.</p>
+      </div>
+    </footer>
+  </body>
+</html>
