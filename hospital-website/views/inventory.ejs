@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Medical Inventory</title>
+    <link rel="stylesheet" href="/inventory.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</head>
+<body>
+    <header>
+        <!-- Header content remains the same -->
+    </header>
+
+    <section class="inventory">
+        <div class="container">
+            <h2>Medical Inventory</h2>
+            <div class="search-bar">
+                <input type="text" id="medicineSearch" placeholder="Search by Medicine Name">
+                <input type="text" id="saltSearch" placeholder="Search by Salt Name">
+                <button class="btttn" onclick="addNewMedicine()">Add New Medicine</button>
+                <select id="sortCriteria" onchange="sortTable()">
+                    <option value="">Sort By</option>
+                    <option value="medicine_name">Alphabetical Order</option>
+                    <option value="quantity">Quantity</option>
+                    <option value="expiry_date">Date of Expiry</option>
+                </select>
+            </div>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Medicine Name</th>
+                        <th>Salt</th>
+                        <th>Quantity</th>
+                        <th>Expiry Date</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody id="inventoryTable">
+                    <% inventory.forEach(item => { %>
+                    <tr>
+                        <td><%= item.medicine_name %></td>
+                        <td><%= item.salt %></td>
+                        <td id="quantity-<%= item.id %>"><%= item.quantity %></td>
+                        <td><%= item.formatted_date %></td>
+                        <td>
+                            <div class="box"><button class="btttn" onclick="updateQuantity(<%= item.id %>, 1)">Push</button>
+                            <button class="btttn" onclick="updateQuantity(<%= item.id %>, -1)">Pull</button></div>
+                            
+                            <button class="btttn delete" onclick="deleteMedicine('<%= item.id %>')">Delete</button>
+                        </td>
+                    </tr>
+                    <% }) %>
+                </tbody>
+            </table>
+        </div>
+    </section>
+
+    <!-- Add New Medicine Popup Form -->
+    <div class="popup-form" id="popupForm">
+        <div class="form-content">
+            <span class="close-btn" onclick="closeForm()">&times;</span>
+            <h2>Add New Medicine</h2>
+            <form id="newMedicineForm">
+                <label for="medicine_name">Medicine Name</label>
+                <input type="text" id="medicine_name" required>
+                
+                <label for="salt">Salt</label>
+                <input type="text" id="salt" required>
+                
+                <label for="quantity">Quantity</label>
+                <input type="number" id="quantity" required>
+                
+                <label for="expiry_date">Expiry Date</label>
+                <input type="date" id="expiry_date" required>
+                
+                <button type="button" class="btttn" onclick="submitNewMedicine()">Add Medicine</button>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        function searchTable(inputId, colIndex) {
+            let input = document.getElementById(inputId).value.toLowerCase();
+            let rows = document.querySelectorAll('#inventoryTable tr');
+            
+            rows.forEach(row => {
+                let cellText = row.cells[colIndex].textContent.toLowerCase();
+                if (cellText.includes(input)) {
+                    row.style.display = '';
+                } else {
+                    row.style.display = 'none';
+                }
+            });
+        }
+
+        document.getElementById('medicineSearch').onkeyup = function () { searchTable('medicineSearch', 0) };
+        document.getElementById('saltSearch').onkeyup = function () { searchTable('saltSearch', 1) };
+
+        function sortTable() {
+            let criteria = document.getElementById('sortCriteria').value;
+            let table = document.querySelector('table');
+            let rows = Array.from(table.querySelectorAll('tbody tr'));
+            let sortedRows;
+
+            if (criteria === 'medicine_name') {
+                sortedRows = rows.sort((rowA, rowB) => {
+                    let cellA = rowA.cells[0].textContent.trim().toLowerCase();
+                    let cellB = rowB.cells[0].textContent.trim().toLowerCase();
+                    return cellA.localeCompare(cellB);
+                });
+            } else if (criteria === 'quantity') {
+                sortedRows = rows.sort((rowA, rowB) => {
+                    let cellA = parseInt(rowA.cells[2].textContent.trim(), 10);
+                    let cellB = parseInt(rowB.cells[2].textContent.trim(), 10);
+                    return cellA - cellB;
+                });
+            } else if (criteria === 'expiry_date') {
+                sortedRows = rows.sort((rowA, rowB) => {
+                    let cellA = new Date(rowA.cells[3].textContent.trim());
+                    let cellB = new Date(rowB.cells[3].textContent.trim());
+                    return cellA - cellB;
+                });
+            } else {
+                // No sorting
+                return;
+            }
+
+            sortedRows.forEach(row => table.querySelector('tbody').appendChild(row));
+        }
+
+        function addNewMedicine() {
+            document.getElementById('popupForm').style.display = 'flex';
+        }
+
+        function closeForm() {
+            document.getElementById('popupForm').style.display = 'none';
+        }
+
+        function submitNewMedicine() {
+            let medicineData = {
+                medicine_name: document.getElementById('medicine_name').value,
+                salt: document.getElementById('salt').value,
+                quantity: document.getElementById('quantity').value,
+                expiry_date: document.getElementById('expiry_date').value,
+            };
+            
+            $.post('/hos-dashboard/inventory/add', medicineData, function(response) {
+                location.reload();
+            });
+        }
+
+        function updateQuantity(id, change) {
+            $.post('/hos-dashboard/inventory/update', { id: id, change: change }, function(response) {
+                let currentQty = parseInt(document.getElementById('quantity-' + id).textContent);
+                document.getElementById('quantity-' + id).textContent = currentQty + change;
+            });
+        }
+
+        function deleteMedicine(medicineId) {
+            if (confirm('Are you sure you want to delete this medicine?')) {
+                $.ajax({
+                    url: `/inventory/delete/${medicineId}`,
+                    method: 'POST',
+                    success: function(response) {
+                        if (response.success) {
+                            window.location.reload();
+                        } else {
+                            alert('Error deleting medicine.');
+                        }
+                    }
+                });
+            }
+        }
+    </script>
+</body>
+</html>

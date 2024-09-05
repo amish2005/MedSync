@@ -12,7 +12,6 @@ const app = express();
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static("public"));
 app.set("view engine", "ejs");
-
 app.use(
   session({
     secret: "your_secret_key",
@@ -42,6 +41,11 @@ app.get("/hosp-login", (req, res) => {
   res.render("hos-login", { errorMessage: null });
 });
 
+
+
+
+
+
 app.post("/hos-login", (req, res) => {
   const { "hospital-number": reg_no, password } = req.body;
 
@@ -56,14 +60,19 @@ app.post("/hos-login", (req, res) => {
       res.redirect("/hos-dashboard");
     } else {
       // Failed login
-      res.send("Incorrect username or password");
+      res.redirect("/hosp-login?error=true");
     }
   });
 });
 
+
+
+
+
+
 app.get("/hos-dashboard", (req, res) => {
   if (!req.session.user) {
-    return res.redirect("/");
+    return res.redirect("/home");
   }
   const query =
     "SELECT hospital_name FROM hospital_details WHERE registration_no = ?";
@@ -77,9 +86,20 @@ app.get("/hos-dashboard", (req, res) => {
   });
 });
 
+
+
+
+
+
+
+
+
+
+
+
 app.get("/hos-dashboard/bed-availability", (req, res) => {
   if (!req.session.user) {
-    return res.redirect("/");
+    return res.redirect("/home");
   }
 
   const query = "SELECT * FROM hospital_details WHERE registration_no = ?";
@@ -123,48 +143,10 @@ app.get("/hos-dashboard/bed-availability", (req, res) => {
   });
 });
 
-//The below code if you uncomment it, it will give you only one database that is live hospital bed availability, naam nahi print hoga.
 
-// app.get('/dashboard/bed-availability', (req, res) => {
-//     const query = 'SELECT * FROM hospital_summary';
 
-//     db.query(query, (err, results) => {
-//         if (err) throw err;
 
-//         if (results.length > 0) {
-//             const totalICU = results[0].total_ICU;
-//             const totalCCU = results[0].total_CCU;
-//             const totalICCU = results[0].total_ICCU;
-//             const totalMW = results[0].total_MW;
-//             const totalGW = results[0].total_GW;
-//             const totalEW = results[0].total_EW;
-//             const availableICU =results[0].available_ICU;
-//             const availableICCU =results[0].available_ICCU;
-//             const availableCCU =results[0].available_CCU;
-//             const availableGW =results[0].available_GW;
-//             const availableMW =results[0].available_MW;
-//             const availableEW =results[0].available_EW;
 
-//             // Pass the data to the EJS template
-//             res.render('index2', {
-//                 totalICU: totalICU,
-//                 totalCCU: totalCCU,
-//                 totalMW: totalMW,
-//                 totalGW: totalGW,
-//                 totalEW: totalEW,
-//                 totalICCU: totalICCU,
-//                 availableCCU: availableCCU,
-//                 availableICCU: availableICCU,
-//                 availableICU: availableICU,
-//                 availableGW: availableGW,
-//                 availableMW: availableMW,
-//                 availableEW: availableEW
-//             });
-//         } else {
-//             res.send('Hospital summary not found');
-//         }
-//     });
-// });
 
 app.post("/logout", (req, res) => {
   req.session.destroy((err) => {
@@ -172,6 +154,17 @@ app.post("/logout", (req, res) => {
     res.redirect("/home");
   });
 });
+
+
+
+
+
+
+
+
+
+
+
 
 // Session management
 app.use(
@@ -182,30 +175,89 @@ app.use(
   })
 );
 
+
+
+
+
+
+
+
+
+
+
 // Routes
 app.get("/", (req, res) => {
   res.render("login");
 });
 
+
+
+
+
+
+
+
+
+
+
+
+
 app.get("/signup", (req, res) => {
   res.render("signup");
 });
 
-app.post("/signup", async (req, res) => {
-  const { name, number, email, age, gender, password } = req.body;
-  const hashedPassword = await bcrypt.hash(password, 10);
 
-  const sql =
-    "INSERT INTO users (name, number, email, age, gender, password) VALUES (?, ?, ?, ?, ?, ?)";
-  db.query(
-    sql,
-    [name, number, email, age, gender, hashedPassword],
-    (err, result) => {
+
+
+
+
+
+
+
+
+
+
+
+app.post("/signup", async (req, res) => {
+    const { name, number, email, age, gender, password } = req.body;
+  
+    // Check if email or number already exists
+    const checkQuery = "SELECT * FROM users WHERE email = ? OR number = ?";
+    db.query(checkQuery, [email, number], async (err, results) => {
       if (err) throw err;
-      res.redirect("/");
-    }
-  );
-});
+  
+      if (results.length > 0) {
+        // Email or number already registered
+        res.redirect("/signup?error=true");
+      } else {
+        // Insert new user
+        const hashedPassword = await bcrypt.hash(password, 10);
+        const sql =
+          "INSERT INTO users (name, number, email, age, gender, password) VALUES (?, ?, ?, ?, ?, ?)";
+        db.query(sql, [name, number, email, age, gender, hashedPassword], (err, result) => {
+          if (err) throw err;
+          res.redirect("/");
+        });
+      }
+    });
+  });
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 app.post("/login", (req, res) => {
   const { username, password } = req.body;
@@ -219,42 +271,80 @@ app.post("/login", (req, res) => {
         req.session.user = user;
         res.redirect("/dashboard");
       } else {
-        res.send("Incorrect password!");
+        res.redirect("/?error=incorrect-password");
       }
     } else {
-      res.send("User not found!");
+      res.redirect("/?error=user-not-found");
     }
   });
 });
+
+
+
+
+
+
+
+
+
+
+
+
 
 app.get("/dashboard", (req, res) => {
   if (req.session.user) {
     res.render("index", { user: req.session.user });
   } else {
-    res.redirect("/");
+    res.redirect("/home");
   }
 });
 
-// app.get('/dashboard/bed-availability', (req, res) => {
-//   if (req.session.user) {
-//     res.render('index2', { user: req.session.user });
-//   } else {
-//     res.redirect('/home/bed-availability');
-//   }
-// });
+  
+
+
+
+
+
+
+
+
 
 // Start server
 app.listen(3000, () => {
   console.log("Server started on http://localhost:3000");
 });
 
+
+
+
+
+
+
+
+
+
+
+
+
 app.get("/home", (req, res) => {
   res.render("home");
 });
 
-app.get("/hos-dashboard/bed-availability", (req, res) => {
-  res.render("hos-bed.ejs");
-});
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 // Log out functionality
 app.post("/logout", (req, res) => {
   req.session.destroy((err) => {
@@ -265,6 +355,10 @@ app.post("/logout", (req, res) => {
   });
 });
 
+
+
+
+
 app.get("/dashboard", (req, res) => {
   if (req.session.user) {
     res.render("index");
@@ -272,6 +366,10 @@ app.get("/dashboard", (req, res) => {
     res.redirect("/home");
   }
 });
+
+
+
+
 
 
 
@@ -284,51 +382,19 @@ app.post("/logoutt", (req, res) => {
   });
 });
 
-// app.get("/dashboard/bed-availability", (req, res) => {
-//   if (!req.session.user) {
-//     return res.redirect("/home/bed-availability");
-//   }
 
-//   const query = "SELECT * FROM hospital_summary";
 
-//   db.query(query, (err, results) => {
-//     if (err) throw err;
 
-//     if (results.length > 0) {
-//       const totalICU = results[0].total_ICU;
-//       const totalCCU = results[0].total_CCU;
-//       const totalICCU = results[0].total_ICCU;
-//       const totalMW = results[0].total_MW;
-//       const totalGW = results[0].total_GW;
-//       const totalEW = results[0].total_EW;
-//       const availableICU = results[0].available_ICU;
-//       const availableICCU = results[0].available_ICCU;
-//       const availableCCU = results[0].available_CCU;
-//       const availableGW = results[0].available_GW;
-//       const availableMW = results[0].available_MW;
-//       const availableEW = results[0].available_EW;
 
-//       // Pass the data to the EJS template, along with the user session data
-//       res.render("index2", {
-//         user: req.session.user,
-//         totalICU: totalICU,
-//         totalCCU: totalCCU,
-//         totalMW: totalMW,
-//         totalGW: totalGW,
-//         totalEW: totalEW,
-//         totalICCU: totalICCU,
-//         availableCCU: availableCCU,
-//         availableICCU: availableICCU,
-//         availableICU: availableICU,
-//         availableGW: availableGW,
-//         availableMW: availableMW,
-//         availableEW: availableEW,
-//       });
-//     } else {
-//       res.send("Hospital summary not found");
-//     }
-//   });
-// });
+
+
+
+
+
+
+
+
+
 
 
 
@@ -393,6 +459,27 @@ app.get('/dashboard/bed-availability', (req, res) => {
   });
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
   app.get('/dashboard/bed-availability/search', (req, res) => {
     if (!req.session.user) {
         return res.redirect("/home/bed-availability");
@@ -420,6 +507,11 @@ app.get('/dashboard/bed-availability', (req, res) => {
     });
 });
 });
+
+
+
+
+
 
 
 
@@ -468,6 +560,18 @@ app.get("/home/bed-availability", (req, res) => {
   });
 });
 
+
+
+
+
+
+
+
+
+
+
+
+
 app.get("/dashboard/adm-pat", (req, res) => {
   if (req.session.user) {
     res.render("pat-adm", { user: req.session.user });
@@ -477,21 +581,33 @@ app.get("/dashboard/adm-pat", (req, res) => {
 });
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 app.get('/dashboard/adm-pat/sub-adm-form', (req, res) => {
+    if (req.session.user) {
     db.query('SELECT registration_no, hospital_name FROM hospital_details', (err, results) => {
       if (err) throw err;
-      res.render('admform', { hospitals: results });
+      res.render('admform', { hospitals: results, user: req.session.user });
     });
+} else {
+    res.redirect("/");
+}
   });
   
 
-app.get("/dashboard/adm-pat/sub-adm-form", (req, res) => {
-  if (req.session.user) {
-    res.render("admform", { user: req.session.user });
-  } else {
-    res.redirect("/");
-  }
-});
+
 
 // Multer setup for file upload
 const storage = multer.diskStorage({
@@ -521,6 +637,7 @@ app.post(
       req.body;
     const report = req.files["report"][0].filename;
     const prescription = req.files["prescription"][0].filename;
+    
 
     const sql =
       "INSERT INTO admissions (patientID ,patientName, age, gender, contactNumber, address, hospital, report, prescription) VALUES (FLOOR(RAND()*1000000000000),?, ?, ?, ?, ?, ?, ?, ?)";
@@ -548,6 +665,9 @@ app.post(
 
 
 app.get("/dashboard/adm-pat/sub-adm-form/form-submitted", (req, res) => {
+
+
+
     const query = `SELECT * FROM admissions ORDER BY id DESC 
   LIMIT 1;`;
 
@@ -661,7 +781,7 @@ app.get('/hos-dashboard/manage-beds', (req, res) => {
     // const hospitalId = 1; // Replace with actual logic to get the hospital ID
 
     if (!req.session.user) {
-        return res.redirect("/");
+        return res.redirect("/hosp-login");
       }
 
     db.query('SELECT * FROM hospital_details WHERE registration_no = ?', [req.session.user.registration_no], (err, results) => {
@@ -748,48 +868,7 @@ app.post('/update-beds', (req, res) => {
 
 
 
-// // Get OPD page
-// app.get('/dashboard/opd', (req, res) => {
-//     let query = 'SELECT registration_no, hospital_name FROM hospital_details';
-//     db.query(query, (err, results) => {
-//         if (err) throw err;
-//         res.render('index-opd-', { hospitals: results });
-//     });
-// });
 
-// // Get doctors for selected hospital
-// app.get('/dashboard/opd/get-doctors/:hospitalRegNo', (req, res) => {
-//     let query = `SELECT doctor_id, name FROM doctors WHERE hospital_reg_no = ?`;
-//     db.query(query, [req.params.hospitalRegNo], (err, results) => {
-//         if (err) throw err;
-//         res.json(results);
-//     });
-// });
-
-
-
-// // Book appointment
-// app.post('/dashboard/opd/book-appointment', (req, res) => {
-//     const { hospital, doctor, date } = req.body;
-
-//     // Query to get the max waiting number for the given combination
-//     let query = 'SELECT MAX(waiting_number) AS max_waiting_number FROM appointments WHERE hospital_reg_no = ? AND doctor_id = ? AND date = ?';
-//     db.query(query, [hospital, doctor, date], (err, results) => {
-//         if (err) throw err;
-
-//         let waitingNumber = 1; // Default to 1 if no appointments exist
-//         if (results[0].max_waiting_number !== null) {
-//             waitingNumber = results[0].max_waiting_number + 1; // Increment by 1 if appointments exist
-//         }
-
-//         // Insert the new appointment with the calculated waiting number
-//         let insertQuery = 'INSERT INTO appointments (hospital_reg_no, doctor_id, date, waiting_number) VALUES (?, ?, ?, ?)';
-//         db.query(insertQuery, [hospital, doctor, date, waitingNumber], (err, result) => {
-//             if (err) throw err;
-//             res.send(`Appointment booked successfully! Your waiting number is ${waitingNumber}`);
-//         });
-//     });
-// });
 
 
 
@@ -816,6 +895,8 @@ app.get('/dashboard/opd/sel-hosp1', (req, res) => {
     });
 });
 
+
+
 // Route to select doctor based on selected hospital
 app.post('/dashboard/opd/sel-hosp1/sel-doct1', (req, res) => {
     const hospitalRegNo = req.body.hospital;
@@ -825,6 +906,8 @@ app.post('/dashboard/opd/sel-hosp1/sel-doct1', (req, res) => {
         res.render('index-opd-doct', { doctors });
     });
 });
+
+
 
 // Route to view doctor's schedule
 app.post('/dashboard/opd/sel-hosp1/sel-doct1/view-schedule', (req, res) => {
@@ -866,6 +949,10 @@ app.get('/book-appointment/:scheduleId', (req, res) => {
 
 
 app.get("/book-appointment/:scheduleID/submitted", (req, res) => {
+    if (!req.session.user) {
+        res.redirect('/hosp-login');
+
+    }
     const query = `SELECT patient_id, patient_name, timings, patient_age, patient_gender, DATE_FORMAT(schedule_date, '%d-%m-%Y') AS formatted_date FROM appointment_date_timingss ORDER BY appointment_id DESC 
   LIMIT 1;`;
 
@@ -929,16 +1016,107 @@ app.get("/book-appointment/:scheduleID/submitted", (req, res) => {
 app.get('/hos-dashboard/app-manage', (req, res) => {
     if (req.session.user) {
       
-    
+    const hospitalName = req.session.user.hospital_name;
     const sql = `SELECT appointment_timings, patient_contact, patient_name, patient_age, doctor_name
                  FROM appointment_date_timing_reg_name WHERE hospital_reg_no = ?`;
 
+
+
     db.query(sql, [req.session.user.registration_no], (err, results) => {
         if (err) throw err;
-        res.render('hos-opd-manage', { appointments: results });
+        res.render('hos-opd-manage', { appointments: results, hospitalName: hospitalName });
+    });
+}
+
+      else {
+        res.redirect('/hosp-login');
+      }
+});
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+// Fetch inventory data for a specific hospital
+app.get('/hos-dashboard/inventory', (req, res) => {
+    if (req.session.user) {
+        const query = `SELECT id, medicine_name, salt, quantity, registration_no, DATE_FORMAT(expiry_date, '%d-%m-%Y') AS formatted_date FROM inventory WHERE registration_no = ?`;
+    
+    db.query(query, [req.session.user.registration_no], (err, result) => {
+        if (err) throw err;
+        res.render('inventory', { inventory: result, formattedDate: result.formatted_date });
+    });
+    }
+    else {
+        res.redirect('/hosp-login');
+    }
+});
+
+// Add new medicine
+app.post('/hos-dashboard/inventory/add', (req, res) => {
+    
+    if (req.session.user) {
+        const { medicine_name, salt, quantity, expiry_date } = req.body;
+        const query = 'INSERT INTO inventory (medicine_name, salt, quantity, expiry_date, registration_no) VALUES (?, ?, ?, ?, ?)';
+    db.query(query, [medicine_name, salt, quantity, expiry_date, req.session.user.registration_no], (err, result) => {
+        if (err) throw err;
+        res.send('Medicine added successfully');
+    });
+    }
+
+    
+});
+
+// Update medicine quantity
+app.post('/hos-dashboard/inventory/update', (req, res) => {
+    const { id, change } = req.body;
+    const query = 'UPDATE inventory SET quantity = quantity + ? WHERE id = ?';
+    
+    db.query(query, [change, id], (err, result) => {
+        if (err) throw err;
+        res.send('Quantity updated successfully');
+    });
+});
+
+
+
+app.post('/inventory/delete/:id', (req, res) => {
+
+    if (req.session.user) {
+    const medicineId = req.params.id;
+    const sql = `DELETE FROM inventory WHERE id = ? AND registration_no = ?`;
+
+    db.query(sql, [medicineId, req.session.user.registration_no], (err, result) => {
+        if (err) {
+            return res.json({ success: false });
+        }
+        res.json({ success: true });
     });
 }
 });
+
+
+
+
+
+
+
 
 
 

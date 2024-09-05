@@ -6,6 +6,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Patient Sign Up</title>
     <link rel="stylesheet" href="/signup.css">
+    <script>
+        window.onload = function() {
+            const urlParams = new URLSearchParams(window.location.search);
+            if (urlParams.get('error') === 'true') {
+                alert("User already registered with this email or number. Please try again.");
+            }
+        };
+    </script>
+
 </head>
 <body>
     <div class="login-container">

@@ -5,6 +5,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Hospital Login</title>
     <link rel="stylesheet" href="/hos-login.css">
+
+    <script>
+        window.onload = function() {
+            const urlParams = new URLSearchParams(window.location.search);
+            if (urlParams.get('error') === 'true') {
+                alert("Incorrect username or password. Please try again.");
+            }
+        };
+    </script>
 </head>
 <body>
     <div class="login-container">
